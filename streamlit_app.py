@@ -6,18 +6,18 @@
 ##               INSTRUÇÕES PARA AJUSTE RÁPIDO DO LAYOUT PARA APRESENTAÇÃO                       ##
 ##                                                                                               ##
 ##  Este painel foi desenhado para ser flexível. Caso a tela da apresentação seja maior ou       ##
-##  menor, altere os valores abaixo para garantir a melhor visualização.                         ##
+##  menor, altere os valores abaixo para garantir a melhor visualização. ##
 ##                                                                                               ##
-##  Recomenda-se colocar a página do navegador em fullscreen (tecla F11). No Google Chrome,      ##
-##  use o botão de tela cheia no menu de três pontos no canto superior direito. Para sair,       ##
-##  pressione ESC ou F11 novamente.                                                               ##
+##  Recomenda-se colocar a página do navegador em fullscreen, pode-se usar a tecla F11, ou,      ## 
+##  no Google Chrome, o botão de tela cheia no menu de três pontos no canto superior direito. ##
+##  Alternativamente, para sair do modo fullscreen, pode-se pressionar a tecla ESC ou F11. ##
 ##                                                                                               ##
 ###################################################################################################
 
-# --- 0. CAMINHOS DOS ARQUIVOS (EDITÁVEL) ---
+# --- 0. CAMINHOS DOS ARQUIVOS (EDITÁVEL) --- 
 # Para "burlar" a necessidade de re-upload após um F5, você pode definir os caminhos locais
 # para os seus arquivos .zip aqui. O aplicativo tentará carregá-los automaticamente.
-# Se o caminho for deixado como "" ou o arquivo não for encontrado, o botão de upload aparecerá.
+# Se o caminho for deixado como "" ou o arquivo não for encontrado, o botão de upload aparecerá. 
 # Exemplo de caminho no Windows: "C:\\Users\\SeuUsuario\\Documentos\\mapas\\ZAS.zip"
 
 ZAS_FILE_PATH = "ZAS_Mirai.zip"
@@ -29,31 +29,33 @@ PE_FILE_TYPE = "zip"
 
 # --- 1. AJUSTES GERAIS DE ALTURA (em pixels) ---
 # Altere os valores numéricos destas variáveis para ajustar a altura das seções principais.
-# Altura da seção que contém o MAPA INTERATIVO. Aumente para um mapa mais alto.
-# - Linha ~84: MAP_SECTION_HEIGHT_PX = 485 (ficou bom com o valor '315' na TV da HBR e com a resolução da pg. em 67% [segurar 'ctrl' + scroll do mouse p/ baixo]) 
+# Altura da seção que contém o MAPA INTERATIVO. Aumente para um mapa mais alto. 
+# - Linha ~151: MAP_SECTION_HEIGHT_PX = 365 (ficou bom com o valor '315' na TV da HBR e com a resolução da pg. em 67% [segurar 'ctrl' + scroll do mouse p/ baixo]) 
 
-# Altura da primeira linha de conteúdo, que afeta diretamente a altura do GRÁFICO DE BARRAS.
-# - Linha ~85: TOP_DATA_ROW_CONTENT_HEIGHT_PX = 270
+# Altura da primeira linha de conteúdo, que afeta diretamente a altura do GRÁFICO DE BARRAS. 
+# - Linha ~154: TOP_DATA_ROW_CONTENT_HEIGHT_PX = 270
 
 # --- 2. AJUSTES DE LARGURA DAS COLUNAS (Proporcional) ---
-# A largura das seções é definida pela função st.columns([ ... ]). 
+# A largura das seções é definida pela função st.columns([ ... ]).
 # Os números dentro da lista são PROPORÇÕES. Mudar esses valores altera a largura relativa das colunas. 
-# Para ajustar, procure pelas seguintes linhas no código:
+# Para ajustar, procure pelas seguintes linhas no código: 
 #
-# - Linha ~993: st.columns([1, 3, 1]) -> Controla as colunas dos Logos e Título Principal. 
-# - Linha ~1034: st.columns([0.07, 0.13, 0.5]) -> Controla as colunas de "Visão Geral", "Visão Detalhada" e o Gráfico. 
-# - Linha ~1123: st.columns([0.3, 0.3, 0.3]) -> Controla as colunas do "Título do Mapa", "Filtro de Município" e "Legenda". 
+# - Linha ~670: st.columns([1, 3, 1]) -> Controla as colunas dos Logos e Título Principal. 
+# - Linha ~698: st.columns([0.07, 0.13, 0.5]) -> Controla as colunas de "Visão Geral", "Visão Detalhada" e o Gráfico. 
+# - Linha ~801: st.columns([0.3, 0.3, 0.3]) -> Controla as colunas do "Título do Mapa", "Filtro de Município" e "Legenda". 
 # --- 3. AJUSTES DE COMPONENTES ESPECÍFICOS (Requerem mais atenção) ---
 # Alguns tamanhos são definidos diretamente no código ou no bloco de CSS no final. 
 #
-# - TAMANHO DOS LOGOS: Na linha ~996, o tamanho é sugerido por `width=100`. 
-#   No final do arquivo, na linha ~1248 o CSS `max-height: 50px;` também pode limitar a altura. 
+# - TAMANHO DOS LOGOS: Na linha ~673, o tamanho é sugerido por `width=100`. 
+#   No final do arquivo, na linha ~1102 o CSS `max-height: 50px;` também pode limitar a altura. 
+#
+# - ALTURA DA CAIXA DE TEXTO (PEs Manuais): Na linha ~783, definida por `height=TOP_DATA_ROW_CONTENT_HEIGHT_PX`. 
 #
 # - TAMANHO DO FILTRO DE MUNICÍPIO: Este é um ajuste delicado, feito no bloco de CSS no final do código. 
 #   Procure pelo seletor `div[data-testid="stSelectbox"] div[data-baseweb="select"] > div:first-child`
 #   e altere os valores de:
-#     - `height: 35px !important;` -> Altura da caixa de seleção (linha ~1304). 
-#     - `width: 180px;` -> Largura da caixa de seleção (linha ~1306). 
+#     - `height: 35px !important;` -> Altura da caixa de seleção (linha ~1165). 
+#     - `width: 180px;` -> Largura da caixa de seleção (linha ~1167). 
 # --- FIM DAS INSTRUÇÕES ---
 
 import streamlit as st
@@ -79,7 +81,6 @@ COLOR_WHITE = "#FFFFFF"
 MAP_SECTION_HEIGHT_PX = 485  # Mude conforme o tamanho do monitor --- 315 na TV da HBR e resolução da pg. de 67% 
 TOP_DATA_ROW_CONTENT_HEIGHT_PX = 270  # Mude conforme o tamanho do monitor
 
-
 # --- Funções Auxiliares ---
 def parse_pe_data(data_string: str) -> pd.DataFrame:
     """
@@ -99,10 +100,10 @@ def parse_pe_data(data_string: str) -> pd.DataFrame:
                 try:
                     name = parts[0].strip()
                     lat = float(parts[1].strip().replace(',', '.'))  # Substitui vírgula por ponto para conversão float 
-                    lon = float(parts[2].strip().replace(',', '.'))  # Substitui vírgula por ponto para conversão float
+                    lon = float(parts[2].strip().replace(',', '.'))  # Substitui vírgula por ponto para conversão float 
                     pes_list.append({'Nome': name, 'Latitude': lat, 'Longitude': lon})
                 except ValueError:
-                    st.sidebar.warning(f"A linha '{line}' não pôde ser processada. Verifique o formato.") 
+                   st.sidebar.warning(f"A linha '{line}' não pôde ser processada. Verifique o formato.") 
             else:
                 st.sidebar.warning(f"A linha '{line}' não tem o formato esperado (Nome | Lat | Lon).")
         elif line.strip(): # Evita avisos para linhas vazias
@@ -111,20 +112,20 @@ def parse_pe_data(data_string: str) -> pd.DataFrame:
 
 def load_pe_from_file(uploaded_file, file_type: str) -> pd.DataFrame:
     """
-    Carrega dados de Ponto de Encontro (PE) de um arquivo enviado (XLSX ou Shapefile ZIP). 
+   Carrega dados de Ponto de Encontro (PE) de um arquivo enviado (XLSX ou Shapefile ZIP). 
     Argumentos:
     uploaded_file: O arquivo enviado pelo usuário via st.file_uploader. 
     file_type: Uma string que indica o tipo de arquivo ("xlsx" ou "shp"). 
     Retorna:
     Um DataFrame Pandas contendo dados de PE. Retorna um DataFrame vazio em caso de erro. 
-    """ 
+    """
     try:
         if file_type == "xlsx":
             df = pd.read_excel(uploaded_file)
         elif file_type == "shp":
             with tempfile.TemporaryDirectory() as tmpdir:  # Cria um diretório temporário
                 with zipfile.ZipFile(uploaded_file, 'r') as zip_ref:
-                    zip_ref.extractall(tmpdir)  # Extrai o conteúdo do zip 
+                     zip_ref.extractall(tmpdir)  # Extrai o conteúdo do zip 
                 shp_file_path = None
                 for item in os.listdir(tmpdir):
                     if item.endswith(".shp"):  # Procura pelo arquivo .shp extraído
@@ -138,7 +139,7 @@ def load_pe_from_file(uploaded_file, file_type: str) -> pd.DataFrame:
                     st.sidebar.warning("Shapefile dos PEs não possui CRS definido. Assumindo WGS84 (EPSG:4326).")
                     gdf.set_crs("EPSG:4326", inplace=True, allow_override=True)
                 elif gdf.crs.to_string() != "EPSG:4326":
-                    gdf = gdf.to_crs("EPSG:4326")  # Reprojeta para WGS84 se necessário 
+                     gdf = gdf.to_crs("EPSG:4326")  # Reprojeta para WGS84 se necessário 
                 df = pd.DataFrame()
                 df['geometry'] = gdf.geometry  # Adiciona a coluna de geometria
                 df['Longitude'] = gdf.geometry.x
@@ -147,7 +148,7 @@ def load_pe_from_file(uploaded_file, file_type: str) -> pd.DataFrame:
                     if col not in ['geometry', 'Longitude', 'Latitude']:  # Adiciona outras colunas do shapefile
                         df[col] = gdf[col]
         else:
-            return pd.DataFrame() 
+             return pd.DataFrame() 
 
         st.session_state.uploaded_pe_df_columns = df.columns.tolist()
         return df
@@ -199,7 +200,7 @@ def load_generic_shapefile(uploaded_file, layer_name: str) -> geopandas.GeoDataF
     if uploaded_file is None:
         return None
     try:
-        # Para lidar tanto com arquivos carregados via uploader quanto com BytesIO do carregamento local 
+         # Para lidar tanto com arquivos carregados via uploader quanto com BytesIO do carregamento local 
         if hasattr(uploaded_file, 'getvalue'):
             file_bytes = uploaded_file.getvalue()
         else:
@@ -207,24 +208,24 @@ def load_generic_shapefile(uploaded_file, layer_name: str) -> geopandas.GeoDataF
             file_bytes = uploaded_file.read()
 
         with tempfile.TemporaryDirectory() as tmpdir:  # Utiliza um diretório temporário para extração
-            temp_zip_path = os.path.join(tmpdir, "data.zip") 
-            with open(temp_zip_path, "wb") as f:
+             temp_zip_path = os.path.join(tmpdir, "data.zip") 
+             with open(temp_zip_path, "wb") as f:
                 f.write(file_bytes)  # Salva o arquivo .zip temporariamente
 
-            with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
+             with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
                 zip_ref.extractall(tmpdir)  # Extrai todos os arquivos do .zip
 
-            shp_file_path = None 
+             shp_file_path = None 
             # Busca recursiva para encontrar o .shp em subdiretórios
-            for root, dirs, files in os.walk(tmpdir):
+             for root, dirs, files in os.walk(tmpdir):
                 for file in files:
                     if file.endswith(".shp"):
-                        shp_file_path = os.path.join(root, file) 
-                        break
+                         shp_file_path = os.path.join(root, file) 
+                         break
                 if shp_file_path:
                     break
 
-            if shp_file_path:
+             if shp_file_path:
                 gdf = geopandas.read_file(shp_file_path)  # Lê o shapefile usando GeoPandas 
                 if gdf.crs is None:  # Verifica o sistema de referência de coordenadas (CRS)
                     st.sidebar.warning(f"Shapefile de {layer_name} não possui CRS definido. Assumindo WGS84 (EPSG:4326).") 
@@ -240,7 +241,7 @@ def load_generic_shapefile(uploaded_file, layer_name: str) -> geopandas.GeoDataF
                 else:
                     st.sidebar.warning(f"O GeoDataFrame de {layer_name} está vazio ou não pôde ser processado.")
                     return None
-            else: 
+             else: 
                 st.sidebar.error(f"Nenhum arquivo .shp encontrado no .zip de {layer_name}.")
                 return None
     except Exception as e:
@@ -352,7 +353,7 @@ else:
         key="municipios_uploader"
     )
     if uploaded_municipios_file:
-        temp_gdf_municipios = load_generic_shapefile(uploaded_municipios_file, "Municípios") 
+         temp_gdf_municipios = load_generic_shapefile(uploaded_municipios_file, "Municípios") 
 
 # Processa o gdf de municípios (seja do path ou do upload)
 if temp_gdf_municipios is not None:
@@ -368,7 +369,7 @@ else:
 
 # O restante da lógica para seleção de colunas de município permanece a mesma
 if 'selected_municipality_name_col' not in st.session_state:
-    st.session_state.selected_municipality_name_col = None 
+     st.session_state.selected_municipality_name_col = None 
 
 gdf_municipios_display = st.session_state.get('gdf_municipios', None)
 selected_municipality_name_col = None
@@ -382,13 +383,13 @@ if gdf_municipios_display is not None:
         common_names = ['MUNICIPIO', 'NOME_MUN', 'NM_MUN', 'NOMEMUNIC', 'NAME', 'NOME']
         for name in common_names:
             if name in available_cols_for_mun_name:
-                default_mun_col_idx = available_cols_for_mun_name.index(name) 
-                break
+                 default_mun_col_idx = available_cols_for_mun_name.index(name) 
+                 break
             elif name.lower() in [c.lower() for c in available_cols_for_mun_name]:
                 default_mun_col_idx = [c.lower() for c in available_cols_for_mun_name].index(name.lower())
                 break
         if not municipality_name_cols and available_cols_for_mun_name:
-            municipality_name_cols = available_cols_for_mun_name 
+             municipality_name_cols = available_cols_for_mun_name 
 
     selected_municipality_name_col = st.sidebar.selectbox(
         "Coluna com Nome do Município:",
@@ -434,7 +435,7 @@ else:
     uploaded_pe_file = st.sidebar.file_uploader(
         "Selecione o arquivo Shapefile (.zip)",
         type=["zip"],
-        key="pe_file_uploader_shp" 
+         key="pe_file_uploader_shp" 
     )
     if uploaded_pe_file:
         raw_uploaded_df = load_pe_from_file(uploaded_pe_file, file_type_ext)
@@ -458,8 +459,8 @@ if raw_uploaded_df is not None and not raw_uploaded_df.empty:
         # Se a coluna salva não for válida, procura por um novo padrão
         for name in common_names:
             if name in cols:
-                default_name_col_idx = cols.index(name) 
-                break
+                 default_name_col_idx = cols.index(name) 
+                 break
     default_lat_col_idx = cols.index("Latitude") if "Latitude" in cols else (cols.index("Lat") if "Lat" in cols else (1 if len(cols)>1 else 0))
     default_lon_col_idx = cols.index("Longitude") if "Longitude" in cols else (cols.index("Lon") if "Lon" in cols else (cols.index("Lng") if "Lng" in cols else (2 if len(cols)>2 else 0)))
 
@@ -472,7 +473,7 @@ if raw_uploaded_df is not None and not raw_uploaded_df.empty:
         try:
             df_pe_initial = pd.DataFrame({
                 'Nome': raw_uploaded_df[name_col].astype(str),
-                'Latitude': pd.to_numeric(raw_uploaded_df[lat_col]), 
+                 'Latitude': pd.to_numeric(raw_uploaded_df[lat_col]), 
                 'Longitude': pd.to_numeric(raw_uploaded_df[lon_col])
             })
             df_pe_initial.dropna(subset=['Latitude', 'Longitude'], inplace=True)
@@ -500,11 +501,10 @@ if df_pe_initial.empty and 'pe_data_raw_input_val' in st.session_state and not s
 current_pe_names = frozenset(df_pe_initial['Nome'].tolist()) if not df_pe_initial.empty else frozenset()
 previous_pe_names = st.session_state.get('previous_pe_names_for_inputs', frozenset())
 
-# --- ALTERADO ---: Adicionado rastreamento de chaves de horário para reset
 if current_pe_names != previous_pe_names:
     keys_to_delete = []
     for k in st.session_state.keys():
-        if k.startswith('participantes_') or k.startswith('esperadas_') or k.startswith('primeiro_chegada_') or k.startswith('ultimo_chegada_') or k.startswith('widget_') or k.startswith('selected_pe_name_dashboard'): 
+        if k.startswith('participantes_') or k.startswith('esperadas_') or k.startswith('widget_') or k.startswith('selected_pe_name_dashboard') or k.startswith('primeiro_chegada_') or k.startswith('ultimo_chegada_'): 
             keys_to_delete.append(k)
     for k_del in keys_to_delete:
         del st.session_state[k_del]
@@ -517,8 +517,8 @@ if not df_pe_initial.empty:
         try:
             df_pe_initial.set_index('Nome', inplace=True)
         except KeyError:
-            st.error("Coluna 'Nome' não encontrada nos dados iniciais dos PEs para definir como índice.") 
-            df_pe_initial = pd.DataFrame()
+             st.error("Coluna 'Nome' não encontrada nos dados iniciais dos PEs para definir como índice.") 
+             df_pe_initial = pd.DataFrame()
 
     if not df_pe_initial.empty:
         df_pe = df_pe_initial.copy()
@@ -529,17 +529,24 @@ if not df_pe_initial.empty:
             with st.sidebar.expander(f"PE: {pe_name}", expanded=False):
                 participantes_key_ss = f'participantes_{pe_name}' 
                 esperadas_key_ss = f'esperadas_{pe_name}'
+                primeiro_chegada_key_ss = f'primeiro_chegada_{pe_name}'
+                ultimo_chegada_key_ss = f'ultimo_chegada_{pe_name}'
+                
                 participantes_key_widget = f'widget_participantes_{pe_name}'
                 esperadas_key_widget = f'widget_esperadas_{pe_name}'
 
                 if participantes_key_ss not in st.session_state:
-                    st.session_state[participantes_key_ss] = 0 
+                     st.session_state[participantes_key_ss] = 0 
                 if esperadas_key_ss not in st.session_state:
                     st.session_state[esperadas_key_ss] = 1
+                if primeiro_chegada_key_ss not in st.session_state:
+                    st.session_state[primeiro_chegada_key_ss] = ""
+                if ultimo_chegada_key_ss not in st.session_state:
+                    st.session_state[ultimo_chegada_key_ss] = ""
 
                 current_participantes = st.number_input(
                     f"Total de Participantes",
-                    min_value=0, 
+                     min_value=0, 
                     value=st.session_state[participantes_key_ss],
                     key=participantes_key_widget,
                     help=f"Número de participantes que chegaram ao PE {pe_name}"
@@ -550,47 +557,31 @@ if not df_pe_initial.empty:
                     f"Número de Pessoas Esperadas",
                     min_value=0,
                     value=st.session_state[esperadas_key_ss],
-                    key=esperadas_key_widget, 
+                     key=esperadas_key_widget, 
                     help=f"Número de pessoas que eram esperadas no PE {pe_name}"
                 )
                 st.session_state[esperadas_key_ss] = current_esperadas
-
-                # --- NOVO: Inputs para horário de chegada ---
-                primeiro_chegada_key_ss = f'primeiro_chegada_{pe_name}'
-                ultimo_chegada_key_ss = f'ultimo_chegada_{pe_name}'
-                primeiro_chegada_key_widget = f'widget_primeiro_chegada_{pe_name}'
-                ultimo_chegada_key_widget = f'widget_ultimo_chegada_{pe_name}'
-
-                if primeiro_chegada_key_ss not in st.session_state:
-                    st.session_state[primeiro_chegada_key_ss] = ""
-                if ultimo_chegada_key_ss not in st.session_state:
-                    st.session_state[ultimo_chegada_key_ss] = ""
-
-                primeiro_chegada = st.text_input(
-                    f"Chegada do Primeiro",
+                
+                st.session_state[primeiro_chegada_key_ss] = st.text_input(
+                    f"Hora de Chegada (Primeiro)",
                     value=st.session_state[primeiro_chegada_key_ss],
-                    key=primeiro_chegada_key_widget,
-                    placeholder="Ex: 09:15",
-                    help=f"Horário de chegada do primeiro participante ao PE {pe_name}"
+                    key=f"widget_primeiro_chegada_{pe_name}",
+                    placeholder="MM:SS",
+                    help="Horário de chegada do primeiro participante."
                 )
-                st.session_state[primeiro_chegada_key_ss] = primeiro_chegada
 
-                ultimo_chegada = st.text_input(
-                    f"Chegada do Último",
+                st.session_state[ultimo_chegada_key_ss] = st.text_input(
+                    f"Hora de Chegada (Último)",
                     value=st.session_state[ultimo_chegada_key_ss],
-                    key=ultimo_chegada_key_widget,
-                    placeholder="Ex: 10:30",
-                    help=f"Horário de chegada do último participante ao PE {pe_name}"
+                    key=f"widget_ultimo_chegada_{pe_name}",
+                    placeholder="MM:SS",
+                    help="Horário de chegada do último participante."
                 )
-                st.session_state[ultimo_chegada_key_ss] = ultimo_chegada
-                # --- FIM ---
 
                 df_pe.loc[pe_name, 'Total de Participantes'] = st.session_state[participantes_key_ss]
                 df_pe.loc[pe_name, 'Número de Pessoas Esperadas'] = st.session_state[esperadas_key_ss] 
-                # --- NOVO: Adiciona horários ao DataFrame ---
-                df_pe.loc[pe_name, 'Chegada do Primeiro'] = st.session_state[primeiro_chegada_key_ss]
-                df_pe.loc[pe_name, 'Chegada do Último'] = st.session_state[ultimo_chegada_key_ss]
-                # --- FIM ---
+                df_pe.loc[pe_name, 'Primeiro Chegada'] = st.session_state[primeiro_chegada_key_ss]
+                df_pe.loc[pe_name, 'Último Chegada'] = st.session_state[ultimo_chegada_key_ss]
 
         def calcular_efetividade(row):
             """Calcula a eficácia com base nos participantes e nas pessoas esperadas."""
@@ -600,10 +591,9 @@ if not df_pe_initial.empty:
         df_pe['Efetividade (%)'] = df_pe.apply(calcular_efetividade, axis=1) 
 
 else:
-    # --- ALTERADO ---: Adicionadas novas colunas ao DataFrame vazio
-    df_pe = pd.DataFrame(columns=['Nome', 'Latitude', 'Longitude', 'Total de Participantes', 'Número de Pessoas Esperadas', 'Efetividade (%)', 'Chegada do Primeiro', 'Chegada do Último'])
+    df_pe = pd.DataFrame(columns=['Nome', 'Latitude', 'Longitude', 'Total de Participantes', 'Número de Pessoas Esperadas', 'Efetividade (%)', 'Primeiro Chegada', 'Último Chegada'])
     if 'Nome' not in df_pe.columns:
-        df_pe = pd.DataFrame(columns=['Latitude', 'Longitude', 'Total de Participantes', 'Número de Pessoas Esperadas', 'Efetividade (%)', 'Chegada do Primeiro', 'Chegada do Último'])
+        df_pe = pd.DataFrame(columns=['Latitude', 'Longitude', 'Total de Participantes', 'Número de Pessoas Esperadas', 'Efetividade (%)', 'Primeiro Chegada', 'Último Chegada'])
         df_pe.index.name = 'Nome'
 
 if not df_pe.empty:
@@ -611,28 +601,27 @@ if not df_pe.empty:
     df_pe_filtered['Município'] = None
 
     if gdf_municipios_display is not None and selected_municipality_name_col and selected_municipality_name_col in gdf_municipios_display.columns:
-        if 'Latitude' in df_pe.columns and 'Longitude' in df_pe.columns: 
+         if 'Latitude' in df_pe.columns and 'Longitude' in df_pe.columns: 
             try:
                 gdf_pe_for_join = geopandas.GeoDataFrame(
                     df_pe.reset_index(),
                     geometry=geopandas.points_from_xy(df_pe['Longitude'], df_pe['Latitude']),
-                    crs="EPSG:4326" 
+                     crs="EPSG:4326" 
                 )
                 joined_gdf = geopandas.sjoin(
                     gdf_pe_for_join,
                     gdf_municipios_display[[selected_municipality_name_col, 'geometry']],
                     how="left", predicate="within"
-                ) 
+                 ) 
                 joined_gdf.drop_duplicates(subset=['Nome'], keep='first', inplace=True)
                 municipality_map = joined_gdf.set_index('Nome')[selected_municipality_name_col]
                 df_pe_filtered['Município'] = df_pe_filtered.index.map(municipality_map)
             except Exception as e:
                 st.error(f"Erro na junção espacial PEs-Municípios: {e}") 
-        else:
+         else:
             st.warning("Colunas 'Latitude' ou 'Longitude' não encontradas nos dados dos PEs para junção espacial.")
 else:
-    # --- ALTERADO ---: Adicionadas novas colunas ao DataFrame filtrado vazio
-    df_pe_filtered = pd.DataFrame(columns=['Nome', 'Latitude', 'Longitude', 'Total de Participantes', 'Número de Pessoas Esperadas', 'Efetividade (%)', 'Município', 'Chegada do Primeiro', 'Chegada do Último'])
+    df_pe_filtered = pd.DataFrame(columns=['Nome', 'Latitude', 'Longitude', 'Total de Participantes', 'Número de Pessoas Esperadas', 'Efetividade (%)', 'Primeiro Chegada', 'Último Chegada', 'Município'])
     df_pe_filtered.set_index('Nome', inplace=True)
 
 # --- FIM DA BARRA LATERAL (LÓGICA) ---
@@ -646,7 +635,7 @@ with row1_col1:
     st.caption(st.session_state.get("organizer_name", ""))
 
 with row1_col2:
-    st.title(st.session_state.get("app_title", "Painel de Acompanhamento")) 
+     st.title(st.session_state.get("app_title", "Painel de Acompanhamento")) 
 
 with row1_col3:
     if st.session_state.get("client_logo_url"):
@@ -683,7 +672,7 @@ if not df_pe.empty:
         )
 
     with col_single_pe:
-        st.markdown("###### Visão Detalhada - Ponto de Encontro")
+        st.markdown("###### Visão Detalhada - PE")
         pe_names_list_display = df_pe_display.index.tolist()
         if not pe_names_list_display: 
             st.info("Nenhum PE disponível para seleção (após filtro).")
@@ -699,7 +688,7 @@ if not df_pe.empty:
             selected_pe_name = st.selectbox(
                 "Selecione o Ponto de Encontro:",
                 options=pe_names_list_display,
-                index=current_selection_idx, 
+                 index=current_selection_idx, 
                 key="selected_pe_name_dashboard_selectbox"
             )
 
@@ -713,30 +702,25 @@ if not df_pe.empty:
 
                 card_metric_col1, card_metric_col2 = st.columns(2)
                 with card_metric_col1:
-                    st.markdown(f"<p class='pe-card-metric-label'>Participantes</p>" 
+                     st.markdown(f"<p class='pe-card-metric-label'>Participantes</p>" 
                                 f"<p class='pe-card-metric-value'>{row_pe_data['Total de Participantes']:,.0f}</p>",
                                 unsafe_allow_html=True)
                 with card_metric_col2: 
                     st.markdown(f"<p class='pe-card-metric-label'>Esperados</p>"
                                 f"<p class='pe-card-metric-value pe-card-metric-value-alt'>{row_pe_data['Número de Pessoas Esperadas']:,.0f}</p>",
                                 unsafe_allow_html=True)
-                
-                # --- NOVO: Seção de horários no card ---
-                st.markdown("<hr class='pe-card-hr'>", unsafe_allow_html=True)
-
-                primeiro_chegada_val = row_pe_data.get('Chegada do Primeiro') or "N/A"
-                ultimo_chegada_val = row_pe_data.get('Chegada do Último') or "N/A"
 
                 card_time_col1, card_time_col2 = st.columns(2)
                 with card_time_col1:
-                    st.markdown(f"<p class='pe-card-metric-label'>Chegada 1º</p>"
-                                f"<p class='pe-card-time-value'>{primeiro_chegada_val}</p>",
+                    primeiro_chegada = row_pe_data.get('Primeiro Chegada') or "N/A"
+                    st.markdown(f"<p class='pe-card-metric-label'>Chegada (Primeiro)</p>"
+                                f"<p class='pe-card-metric-value'>{primeiro_chegada}</p>",
                                 unsafe_allow_html=True)
                 with card_time_col2:
-                    st.markdown(f"<p class='pe-card-metric-label'>Chegada Último</p>"
-                                f"<p class='pe-card-time-value'>{ultimo_chegada_val}</p>",
+                    ultimo_chegada = row_pe_data.get('Último Chegada') or "N/A"
+                    st.markdown(f"<p class='pe-card-metric-label'>Chegada (Último)</p>"
+                                f"<p class='pe-card-metric-value pe-card-metric-value-alt'>{ultimo_chegada}</p>",
                                 unsafe_allow_html=True)
-                # --- FIM ---
 
                 st.markdown("</div>", unsafe_allow_html=True) 
             elif not df_pe_display.empty:
@@ -749,13 +733,13 @@ if not df_pe.empty:
             df_melted = df_melted_source.melt(
                 id_vars=['Nome'],
                 value_vars=['Total de Participantes', 'Número de Pessoas Esperadas'],
-                var_name='Métrica', value_name='Quantidade' 
+                 var_name='Métrica', value_name='Quantidade' 
             )
             fig_participantes_esperados = px.bar(
                 df_melted, x='Nome', y='Quantidade', color='Métrica', barmode='group',
                 color_discrete_map={
                     'Total de Participantes': COLOR_SECONDARY,
-                    'Número de Pessoas Esperadas': COLOR_PRIMARY 
+                     'Número de Pessoas Esperadas': COLOR_PRIMARY 
                 },
                 labels={'Nome': 'Ponto de Encontro', 'Quantidade': 'Número de Pessoas'},
                 text_auto=True
@@ -766,7 +750,7 @@ if not df_pe.empty:
                 plot_bgcolor=COLOR_WHITE, paper_bgcolor=COLOR_WHITE,
                 font_color=COLOR_PRIMARY,
                 xaxis=dict(tickfont=dict(color=COLOR_PRIMARY, size=16)),
-                yaxis=dict(tickfont=dict(color=COLOR_PRIMARY, size=14)), 
+                 yaxis=dict(tickfont=dict(color=COLOR_PRIMARY, size=14)), 
                 legend_title_text='',
                 legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(color=COLOR_PRIMARY, size=16)),
                 margin=dict(t=20, b=0, l=0, r=0)
@@ -799,7 +783,7 @@ if not df_pe.empty:
                     options=municipality_options,
                     key="selected_municipality_filter",
                     index=current_filter_index,
-                    label_visibility="collapsed" 
+                     label_visibility="collapsed" 
                 )
         else:
             selected_municipality_filter = "Todos os Municípios"
@@ -856,7 +840,7 @@ if not df_pe.empty:
 
     m = folium.Map(
         location=[map_center_lat, map_center_lon],
-        zoom_start=zoom_start, 
+         zoom_start=zoom_start, 
         tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         attr="Esri &mdash; Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
     )
@@ -876,7 +860,7 @@ if not df_pe.empty:
                     base_style['color'] = COLOR_PRIMARY
                     base_style['weight'] = 1.5
             except Exception:
-                pass 
+                 pass 
             return base_style
         tooltip_fields_mun = [municipio_name_col_map] if municipio_name_col_map and municipio_name_col_map in gdf_municipios_map.columns else []
         popup_mun = None
@@ -884,14 +868,14 @@ if not df_pe.empty:
             popup_mun = folium.features.GeoJsonPopup(fields=[municipio_name_col_map], aliases=["Município:"])
         if tooltip_fields_mun:
             folium.GeoJson(
-                gdf_municipios_map, 
+                 gdf_municipios_map, 
                 name='Municípios',
                 style_function=style_function_municipio,
                 tooltip=folium.GeoJsonTooltip(fields=tooltip_fields_mun, aliases=["Município:"], sticky=False),
                 popup=popup_mun
             ).add_to(m)
         else:
-            folium.GeoJson(gdf_municipios_map, name='Municípios', style_function=style_function_municipio).add_to(m) 
+             folium.GeoJson(gdf_municipios_map, name='Municípios', style_function=style_function_municipio).add_to(m) 
 
     if gdf_zas_map is not None and isinstance(gdf_zas_map, geopandas.GeoDataFrame) and not gdf_zas_map.empty:
         attribute_columns_zas = [col for col in gdf_zas_map.columns if col != gdf_zas_map.geometry.name]
@@ -901,24 +885,35 @@ if not df_pe.empty:
             tooltip=folium.GeoJsonTooltip(fields=attribute_columns_zas, aliases=[f"{col}:" for col in attribute_columns_zas], sticky=False) 
         ).add_to(m)
 
-    # --- ALTERADO ---: Popup e Tooltip do mapa atualizados para incluir horários
     for idx_name, row_pe_map in df_pe_display.iterrows():
-        primeiro_chegada_val_map = row_pe_map.get('Chegada do Primeiro') or 'N/A'
-        ultimo_chegada_val_map = row_pe_map.get('Chegada do Último') or 'N/A'
-
-        popup_html = f"""<div style="font-family: Arial, sans-serif; font-size: 12px; overflow-wrap: break-word;">
+        popup_html = f"""<div style="font-family: Arial, sans-serif; font-size: 12px; overflow-wrap: break-word;"> 
             <strong>PE:</strong> {idx_name}<br>
             <strong>Participantes:</strong> {row_pe_map['Total de Participantes']:,.0f}<br>
             <strong>Esperados:</strong> {row_pe_map['Número de Pessoas Esperadas']:,.0f}<br>
-            <strong>Efetividade:</strong> {row_pe_map['Efetividade (%)']:.2f}%<br>
-            <hr style="margin: 4px 0; border: none; border-top: 1px solid #ddd;">
-            <strong>Chegada 1º:</strong> {primeiro_chegada_val_map}<br>
-            <strong>Chegada Último:</strong> {ultimo_chegada_val_map}""" 
-
+            <strong>Efetividade:</strong> {row_pe_map['Efetividade (%)']:.2f}%"""
+        
+        primeiro_chegada_pop = row_pe_map.get('Primeiro Chegada')
+        if primeiro_chegada_pop:
+            popup_html += f"<br><strong>Chegada (Primeiro):</strong> {primeiro_chegada_pop}"
+        
+        ultimo_chegada_pop = row_pe_map.get('Último Chegada')
+        if ultimo_chegada_pop:
+            popup_html += f"<br><strong>Chegada (Último):</strong> {ultimo_chegada_pop}"
+            
         if 'Município' in row_pe_map and pd.notna(row_pe_map['Município']):
             popup_html += f"<br><strong>Município:</strong> {row_pe_map['Município']}</div>"
         else:
-            popup_html += "</div>" 
+             popup_html += "</div>" 
+
+        tooltip_text = f"PE: {idx_name} | Efetividade: {row_pe_map['Efetividade (%)']:.1f}%"
+        primeiro_chegada_tip = row_pe_map.get('Primeiro Chegada')
+        if primeiro_chegada_tip:
+            tooltip_text += f" | Chegada (1º): {primeiro_chegada_tip}"
+        
+        ultimo_chegada_tip = row_pe_map.get('Último Chegada')
+        if ultimo_chegada_tip:
+            tooltip_text += f" | Chegada (Último): {ultimo_chegada_tip}"
+            
         efetividade_valor = row_pe_map['Efetividade (%)']
         pe_icon_color = 'gray'
         pe_icon_symbol = 'minus-sign'
@@ -934,7 +929,7 @@ if not df_pe.empty:
         folium.Marker( 
             location=[row_pe_map['Latitude'], row_pe_map['Longitude']],
             popup=folium.Popup(popup_html, max_width=250),
-            tooltip=f"{idx_name} | Efet.: {row_pe_map['Efetividade (%)']:.1f}% | Chegada 1º: {primeiro_chegada_val_map}", 
+            tooltip=tooltip_text, 
             icon=folium.Icon(color=pe_icon_color, icon=pe_icon_symbol, prefix='glyphicon')
         ).add_to(m)
 
@@ -947,7 +942,7 @@ if not df_pe.empty:
 
     # Criar um contêiner APENAS para o mapa
     with st.container():
-        st_folium(m, use_container_width=True) 
+         st_folium(m, use_container_width=True) 
 
     # Renderiza o rodapé FORA e DEPOIS do contêiner do mapa
     st.markdown(
@@ -971,7 +966,7 @@ else:
         <div style="margin-top: 1rem; margin-bottom: 0rem;">
             <p style='text-align:center; color:{COLOR_PRIMARY}; font-size:0.9em;'>
                 {st.session_state.get('app_title', 'Painel de Simulado PAE')} | Desenvolvido para visualização otimizada de dados.
-            </p> 
+             </p> 
         </div>
         """,
         unsafe_allow_html=True
@@ -984,14 +979,14 @@ else:
 keys_to_persist = [
     "app_title", "organizer_name", "organizer_logo_url", "client_name", "client_logo_url",
     "pe_input_method_idx", "pe_data_raw_input_val",
-    "selected_municipality_name_col", "selected_municipality_filter", 
+     "selected_municipality_name_col", "selected_municipality_filter", 
     "pe_name_col_select", "pe_lat_col_select", "pe_lon_col_select",
     "previous_pe_names_for_inputs",
     "df_pe_configured"
 ]
 
-# Dicionário que conterá todo o estado a ser salvo.
-state_to_save = {} 
+# Dicionário que conterá todo o estado a ser salvo. 
+state_to_save = {}
 # Itera sobre as chaves que queremos salvar
 for key in keys_to_persist:
     if key in st.session_state:
@@ -1001,15 +996,15 @@ for key in keys_to_persist:
         if key == 'previous_pe_names_for_inputs' and isinstance(value, frozenset):
             state_to_save[key] = list(value)
         else:
-            state_to_save[key] = value 
+             state_to_save[key] = value 
 
-# --- ALTERADO ---: Adiciona dinamicamente os valores de contagem e horário de cada PE ao dicionário.
-for key in st.session_state.keys(): 
+# Adiciona dinamicamente os valores de contagem de cada PE ao dicionário. 
+for key in st.session_state.keys():
     if key.startswith('participantes_') or key.startswith('esperadas_') or key.startswith('primeiro_chegada_') or key.startswith('ultimo_chegada_'):
         state_to_save[key] = st.session_state[key]
 
-# Salva o dicionário de estado no localStorage, sobrescrevendo a versão anterior.
-localS.setItem(APP_STATE_KEY, state_to_save) 
+# Salva o dicionário de estado no localStorage, sobrescrevendo a versão anterior. 
+localS.setItem(APP_STATE_KEY, state_to_save)
 # --- FIM: LÓGICA PARA SALVAR ESTADO ATUAL (LocalStorage) ---
 
 
@@ -1069,36 +1064,20 @@ custom_css = f"""
     .pe-card-metric-label {{ /* Rótulo de métrica dentro do card (ex: "Participantes") */
         font-size: 0.85em; /* Tamanho da fonte. */ 
         color: #495057; /* Cor do texto (cinza escuro). */ 
-        margin-bottom: 0.1rem; /* Margem inferior mínima. */ 
-        line-height: 1.2; /* Altura da linha para melhor legibilidade. */ 
+        margin-bottom: 0rem; /* Margem inferior zerada. */ 
+        line-height: 1.3; /* Altura da linha para melhor legibilidade. */ 
+        white-space: nowrap; /* Evita que o texto quebre em duas linhas */
     }}
     .pe-card-metric-value {{ /* Valor da métrica dentro do card (ex: número de participantes) */
-        font-size: 1.15em; /* Tamanho da fonte, um pouco maior que o rótulo. */ 
+        font-size: 1.1em; /* Tamanho da fonte, um pouco menor para caber mais info. */ 
         font-weight: bold; /* Texto em negrito. */ 
         color: {COLOR_SECONDARY}; /* Cor do texto (cor secundária da empresa). */ 
-        margin-bottom: 0; /* Sem margem inferior. */ 
+        margin-bottom: 0.3rem; /* Margem inferior para separar as linhas de métricas. */ 
         line-height: 1.2; /* Altura da linha. */ 
     }}
     .pe-card-metric-value-alt {{ /* Estilo alternativo para valor de métrica no card (ex: número de esperados) */
         color: {COLOR_PRIMARY}; /* Usa a cor primária da empresa. */ 
     }}
-
-    /* --- NOVO: Estilos para a seção de horários no card --- */
-    .pe-card-hr {{
-        border: none;
-        height: 1px;
-        background-color: #eee;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }}
-    .pe-card-time-value {{
-        font-size: 1.1em;
-        font-weight: bold;
-        color: #495057; /* Cinza escuro */
-        margin-bottom: 0;
-        line-height: 1.2;
-    }}
-    /* --- FIM --- */
 
     /* --- ESTILOS GERAIS PARA TÍTULOS (H1, H2, H4, H5) --- */
     h1, h2, h4, h5 {{
@@ -1201,3 +1180,7 @@ custom_css = f"""
 </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
+
+# Rodapé
+#st.markdown("---") # Linha divisória antes do rodapé
+#st.markdown(f"<p style='text-align:center; color:{COLOR_PRIMARY}; font-size:0.9em; margin-top: 0rem !important; margin-bottom: 0rem !important;'>{st.session_state.get('app_title', 'Painel de Simulado PAE')} | Desenvolvido para visualização otimizada de dados</p>", unsafe_allow_html=True)
