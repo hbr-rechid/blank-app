@@ -20,10 +20,10 @@
 # Se o caminho for deixado como "" ou o arquivo não for encontrado, o botão de upload aparecerá. 
 # Exemplo de caminho no Windows: "C:\\Users\\SeuUsuario\\Documentos\\mapas\\ZAS.zip"
 
-ZAS_FILE_PATH = "ZAS_Mirai.zip"
-MUNICIPIOS_FILE_PATH = "Municipios_ZAS_Mirai.zip"
+ZAS_FILE_PATH = "DB_ITA_ZAS.zip"
+MUNICIPIOS_FILE_PATH = "Municipios_ZAS_Itamarati.zip"
 # Para os PEs, defina o caminho e o tipo ('shp' para shapefile .zip ou 'xlsx' para Excel) ### Priorizar '.zip'
-PE_FILE_PATH = "PAE_MIR_PontoEncontro_CBA2025.zip"
+PE_FILE_PATH = "PE_ITA_CBA2025.zip"
 PE_FILE_TYPE = "zip"
 
 
