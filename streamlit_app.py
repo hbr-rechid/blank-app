@@ -267,17 +267,19 @@ APP_STATE_KEY = "pae_dashboard_state_hbr"
 
 # Na inicialização do app, tenta carregar o estado salvo no navegador
 if 'state_loaded' not in st.session_state:
-    saved_state = localS.getItem(APP_STATE_KEY)
-    if saved_state:
-        try:
+    try:
+        # Tenta obter o estado salvo
+        saved_state = localS.getItem(APP_STATE_KEY)
+        if saved_state:
             st.session_state.update(saved_state)
-            # ---- INÍCIO DA MODIFICAÇÃO ----
             # Converte a lista salva de volta para frozenset para a lógica de comparação funcionar
             if 'previous_pe_names_for_inputs' in st.session_state and isinstance(st.session_state.get('previous_pe_names_for_inputs'), list):
                 st.session_state.previous_pe_names_for_inputs = frozenset(st.session_state.previous_pe_names_for_inputs)
-            # ---- FIM DA MODIFICAÇÃO ----
-        except Exception as e:
-            st.warning(f"Não foi possível carregar o estado salvo anteriormente: {e}")
+    except Exception as e:
+        # Se qualquer erro ocorrer (incluindo o TypeError), avisa e continua com um estado limpo
+        st.warning(f"Não foi possível carregar o estado salvo. Um novo estado será criado. Erro: {e}")
+    
+    # Garante que a flag seja definida para não tentar carregar novamente
     st.session_state.state_loaded = True
 # --- FIM: LÓGICA PARA CARREGAR ESTADO SALVO (LocalStorage) ---
 
